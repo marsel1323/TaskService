@@ -16,5 +16,15 @@
   "bugs": {
     "url": "https://github.com/marsel1323/TaskService/issues"
   },
-  "homepage": "https://github.com/marsel1323/TaskService#readme"
+  "homepage": "https://github.com/marsel1323/TaskService#readme",
+  "dependencies": {
+    "knex": "^0.19.5",
+    "objection": "^1.6.11",
+    "pg": "^7.12.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  }
 }
