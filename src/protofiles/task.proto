@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+service TaskService {
+    rpc create (CreateRequest) returns (CreateResponse);
+    rpc get (GetRequest) returns (GetResponse);
+    rpc list (ListRequest) returns (ListResponse);
+    rpc update (UpdateRequest) returns (UpdateResponse);
+    rpc remove (RemoveRequest) returns (RemoveResponse);
+}
+
+message CreateRequest {
+    string name = 1;
+    int32 UserId = 2;
+}
+
+message CreateResponse {
+    Task result = 1;
+}
+
+message GetRequest {
+    int32 id = 1;
+}
+
+message GetResponse {
+    Task result = 1;
+}
+
+message ListRequest {
+    int32 limit = 1;
+    int32 offset = 2;
+}
+
+message ListResponse {
+    repeated Task results = 1;
+}
+
+message UpdateRequest {
+    Task task = 1;
+}
+
+message UpdateResponse {
+    bool success = 1;
+}
+
+message RemoveRequest {
+    int32 id = 1;
+}
+
+message RemoveResponse {
+    bool success = 1;
+}
+
+message Task {
+    int32 id = 1;
+    string name = 2;
+    string status = 3;
+    int32 UserId = 4;
+}
+
+message NullRequest {
+}
+
+message NullResponse {
+}

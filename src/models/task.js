@@ -21,6 +21,9 @@ class Task extends Model {
           default: 0,
         },
 
+        // startDate
+        // endDate
+
         // created_at
         // updated_at
         // finished_at || canceled_at
