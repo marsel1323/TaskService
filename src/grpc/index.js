@@ -1,64 +1,41 @@
+const grpc = require('grpc');
+
 const services = require('../services');
 
-const create = async (call, callback) => {
+
+const wrapper = async (call, callback, method) => {
   try {
-    console.log('call to create task', call.request);
-    const result = await services.get(call.request);
-    callback(null, { success: result });
+    console.log('Call to:', method.name);
+    console.log({ creds: call.request });
+    const result = await method(call.request);
+    console.log({ result });
+    callback(null, { result });
   } catch (error) {
-    console.error('call to create task', error.message, JSON.stringify(error));
-    callback(null, { success: false });
+    console.error('Error:');
+    console.error(error.message);
+    callback({
+      code: grpc.status.INVALID_ARGUMENT,
+      message: error.message,
+    }, { result: null });
   }
 };
 
-const get = async (call, callback) => {
-  try {
-    console.log('call to get task', call.request);
-    const result = await services.get(call.request);
-    callback(null, { success: result });
-  } catch (error) {
-    console.error('call to get task', error.message, JSON.stringify(error));
-    callback(null, { success: false });
-  }
-};
 
-const list = async (call, callback) => {
-  try {
-    console.log('call to list task', call.request);
-    const result = await services.list(call.request);
-    callback(null, { success: result });
-  } catch (error) {
-    console.error('call to list task', error.message, JSON.stringify(error));
-    callback(null, { success: false });
-  }
-};
+const create = (creds) => services.create(creds);
 
-const update = async (call, callback) => {
-  try {
-    console.log('call to update task', call.request);
-    const result = await services.update(call.request);
-    callback(null, { success: result });
-  } catch (error) {
-    console.error('call to update task', error.message, JSON.stringify(error));
-    callback(null, { success: false });
-  }
-};
+const get = (creds) => services.get(creds);
 
-const remove = async (call, callback) => {
-  try {
-    console.log('call to remove task', call.request);
-    const result = await services.remove(call.request);
-    callback(null, { success: result });
-  } catch (error) {
-    console.error('call to remove task', error.message, JSON.stringify(error));
-    callback(null, { success: false });
-  }
-};
+const list = (creds) => services.list(creds);
+
+const update = (creds) => services.update(creds);
+
+const remove = (creds) => services.remove(creds);
+
 
 module.exports = {
-  create,
-  get,
-  list,
-  update,
-  remove,
+  create: (call, callback) => wrapper(call, callback, create),
+  get: (call, callback) => wrapper(call, callback, get),
+  list: (call, callback) => wrapper(call, callback, list),
+  update: (call, callback) => wrapper(call, callback, update),
+  remove: (call, callback) => wrapper(call, callback, remove),
 };

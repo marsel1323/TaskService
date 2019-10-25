@@ -31,7 +31,7 @@ message ListRequest {
 }
 
 message ListResponse {
-    repeated Task results = 1;
+    repeated Task result = 1;
 }
 
 message UpdateRequest {
@@ -54,7 +54,7 @@ message Task {
     int32 id = 1;
     string name = 2;
     string status = 3;
-    int32 UserId = 4;
+    // int32 UserId = 4;
 }
 
 message NullRequest {
