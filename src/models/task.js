@@ -8,17 +8,19 @@ class Task extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['name'],
+      required: ['name', 'UserId'],
 
       properties: {
-        // UserId
         name: {
           type: 'string',
           default: 0,
         },
         status: {
           type: 'string',
-          default: 0,
+          default: 'new',
+        },
+        UserId: {
+          type: 'integer',
         },
 
         // startDate

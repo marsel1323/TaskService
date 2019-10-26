@@ -1,13 +1,12 @@
 // Update with your config settings.
+const dotenv = require('dotenv-safe');
+
+dotenv.config();
 
 module.exports = {
   development: {
     client: 'postgresql',
-    connection: {
-      database: 'tasks',
-      user: 'marsel',
-      password: 'marsel',
-    },
+    connection: process.env.DB_URL,
     pool: {
       min: 2,
       max: 10,
