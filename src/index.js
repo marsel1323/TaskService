@@ -16,6 +16,6 @@ server.addService(packageObject.TaskService.service, grpcService);
 
 server.bind(`0.0.0.0:${process.env.PORT}`, grpc.ServerCredentials.createInsecure());
 server.start();
-console.log(`Librarian Service start at ${process.env.PORT}`);
+console.log(`Task Service start at ${process.env.PORT}`);
 
 module.exports = server;
