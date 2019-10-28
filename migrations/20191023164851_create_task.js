@@ -1,5 +1,6 @@
 
 exports.up = (knex) => knex.schema
+  .hasTable('task')
   .createTable('task', (table) => {
     table.increments('id').primary();
     table.string('name');
